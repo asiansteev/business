@@ -40,8 +40,10 @@ module LabelTags
     end
     businesses.sort!{|x, y| x.name <=> y.name}
     businesses.each do |b|
-      tag.locals.business = b
-      result << tag.expand
+      if b.paid_thru_now
+        tag.locals.business = b
+        result << tag.expand
+      end
     end
     result 
   end
@@ -65,7 +67,7 @@ module LabelTags
   tag "label:gmap" do |tag|
     map = GoogleMap.new
     Business.find_tagged_with("\"#{tag.locals.label.send("name")}\"").each do |b|
-      if b.lat
+      if b.lat and b.paid_thru_now
         map.markers << GoogleMapMarker.new(:map => map,
                                          :lat => b.lat,
                                          :lng => b.lng,

@@ -46,6 +46,14 @@ class Business < ActiveRecord::Base
       super
     end
   end
+  
+  ##
+  # Returns true if business is paid through today.
+  #
+  def paid_thru_now
+    # Turn off Feb. 1 of year following paid year
+    paid_thru_year >= (Date.today - 31).year
+  end
 
   private
 
@@ -78,5 +86,5 @@ class Business < ActiveRecord::Base
       puts "did not match any combination of address1 and address2"
     end
   end
-
+  
 end

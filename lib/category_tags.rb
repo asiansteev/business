@@ -62,7 +62,7 @@ module CategoryTags
     tag.locals.category.tags.each do |t|
       Business.find_tagged_with("\"#{t.name}\"").each do |b|
         if map.markers.length < 20
-          if b.lat
+          if b.lat and b.paid_thru_now
             map.markers << GoogleMapMarker.new(:map => map,
                                           :lat => b.lat,
                                           :lng => b.lng,
