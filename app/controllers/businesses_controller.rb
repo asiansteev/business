@@ -79,4 +79,16 @@ class BusinessesController < ApplicationController
 
     redirect_to businesses_url
   end
+
+  def add_year
+    @business = Business.find params[:id]
+    @business.paid_thru_year = @business.paid_thru_year + 1
+    if @business.save
+      flash[:notice] = "1 Year Added to #{@business.name}"
+    else
+      flash[:error] = "Failed to Add Year to #{business.name}"
+    end
+    redirect_to businesses_url
+  end
+
 end

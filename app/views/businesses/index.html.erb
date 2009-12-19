@@ -8,8 +8,11 @@
   </tr>
 <% for business in @businesses %>
   <tr>
-    <td><%= business.name %>
-    <td><%= business.paid_thru_year %>
+    <td><%= business.name %></td>
+    <td>
+      <%= business.paid_thru_year %>
+      <%= link_to '+', :action => 'add_year', :id => business.id %>
+    </td>
     <td><%= business.tag_list%></td>
     <td><%= link_to 'Show', business %></td>
   <td><%= link_to 'Edit', edit_business_path(business) %></td>
