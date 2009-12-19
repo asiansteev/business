@@ -1,0 +1,69 @@
+<h3>New business</h1>
+
+<% form_for(@business) do |f| %>
+  <%= f.error_messages %>
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td>Short Description:</td>
+      <td><%= f.text_field :short_description %></td>
+    </tr>
+    <tr>
+      <td>Address Line 1:</td>
+      <td><%= f.text_field :address_line_1 %></td>
+    </tr>
+    <tr>
+      <td>Address Line 2:</td>
+      <td><%= f.text_field :address_line_2 %></td>
+    </tr>
+    <tr>
+      <td>City:</td>
+      <td><%= f.text_field :city %></td>
+    </tr>
+    <tr>
+      <td>State:</td>
+      <td><%= f.text_field :state %></td>
+    </tr>
+    <tr>
+      <td>Zip:</td>
+      <td><%= f.text_field :zip %></td>
+    </tr>
+    <tr>
+      <td>Phone:</td>
+      <td><%= f.text_field :phone %></td>
+    </tr>
+    <tr>
+      <td>Phone 2:</td>
+      <td><%= f.text_field :phone_2 %></td>
+    </tr>
+    <tr>
+      <td>E-mail:</td>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <td>Website URL:</td>
+      <td><%= f.text_field :url %></td>
+    </tr>
+    <tr>
+      <td>Website URL 2:</td>
+      <td><%= f.text_field :url_2 %></td>
+    </tr>
+    <tr>
+      <td>Description:</td>
+      <td><%= f.text_area :description %></td>
+    </tr>
+    <tr>
+      <td>Tag List:</td>
+      <td><%= f.text_area :tag_list %></td>
+    </tr>
+  </table>
+ 
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', businesses_path %>

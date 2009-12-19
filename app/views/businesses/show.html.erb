@@ -1,0 +1,107 @@
+<table>
+  <tr>
+    <td>Name:</td>
+    <td><%= @business.name %></td>
+  </tr>
+  <tr>
+    <td>Short Description:</td>
+    <td><%= @business.short_description %></td>
+  </tr>
+  <tr>
+    <td>Address Line 1:</td>
+    <td><%= @business.address_line_1 %></td>
+  </tr>
+  <tr>
+    <td>Address Line 2:</td>
+    <td><%= @business.address_line_2 %></td>
+  </tr>
+  <tr>
+    <td>City:</td>
+    <td><%= @business.city %><td>
+  </tr>
+  <tr>
+    <td>State:</td>
+    <td><%= @business.state %></td>
+  </tr>
+  <tr>
+    <td>Zip:</td>
+    <td><%= @business.zip %></td>
+  </tr>
+  <tr>
+    <td>Phone:</td>
+    <td><%= @business.phone %></td>
+  </tr>
+  <tr>
+    <td>Phone 2:</td>
+    <td><%= @business.phone_2 %></td>
+  </tr>
+  <tr>
+    <td>E-Mail:</td>
+    <td><%= @business.email %></td>
+  </tr>
+  <tr>
+    <td>Website URL 2:</td>
+    <td><%= @business.url_2 %></td>
+  </tr>
+  <tr>
+    <td>Website URL:</td>
+    <td><%= @business.url %></td>
+  </tr>
+  <tr>
+    <td>Description:</td>
+    <td><%= @business.description %></td>
+  </tr>
+  <tr>
+    <td>Tags:</td>
+    <td><%= @business.tag_list %></td>
+  </tr>
+</table>
+
+
+  <h2>Additional Locations</h2>
+  <% unless @business.additional_locations.empty? %>
+    <% @business.additional_locations.each do |loc| %>
+      <p>
+        <table>
+          <tr>
+            <td>Address Line 1:</td>
+            <td><%= loc.address_line_1 %></td>
+          </tr>
+          <% unless loc.address_line_2.nil? %>
+            <tr>
+              <td>Address Line 2:</td>
+              <td><%= loc.address_line_2 %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td>City:</td>
+            <td><%= loc.city %></td>
+          </tr>
+          <tr>
+            <td>State:</td>
+            <td><%= loc.state %></td>
+          </tr>
+          <tr>
+            <td>Zip:</td>
+            <td><%= loc.zip %></td>
+          </tr>
+          <tr>
+            <td>Phone:</td>
+            <td><%= loc.phone %></td>
+          </tr>
+          <% unless loc.phone_2.nil? %>
+            <tr>
+              <td>Phone 2:</td>
+              <td><%= loc.phone_2 %></td>
+            </tr>
+          <% end %>
+        </table>
+      </p>
+    <% end %>
+  <% else %>
+    No additional locations.. yet<br />
+  <% end %>
+
+
+<%= link_to 'Edit', edit_business_path(@business) %> |
+<%= link_to 'Back', businesses_path %>

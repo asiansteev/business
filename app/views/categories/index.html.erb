@@ -1,0 +1,46 @@
+<h1>Listing Categories</h1>
+
+<p>
+  <table>
+    <% for category in @categories %>
+      <tr>
+        <td><strong><%= category.name %></stong>
+        <td><%= link_to 'Edit', edit_category_path(category) %></td>
+        <td><%= link_to 'Destroy', category, 
+          :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+</p>
+
+<%= link_to 'New Category', new_category_path %>
+
+<h2>Listing Labels</h2>
+<p>
+  <table>
+    <tr>
+      <th>Label</th>
+      <th>Category</th>
+    </tr>
+    <% Tag.find(:all, :order => "name").each do |t| %>
+      <tr>
+        <td><%= t %></td>
+        <td>
+          <%= 
+            if c = Category.find_tagged_with("'#{t}'").first
+              c.name
+            else
+              'none'
+            end
+          %>
+        </td>
+        <td><%= link_to 'Edit', edit_tag_path(t) %></td>
+        <td><%= link_to 'Destroy', t, 
+          :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= link_to 'New Label', new_tag_path %>
+</p>
+
+<br />

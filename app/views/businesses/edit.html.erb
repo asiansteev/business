@@ -1,0 +1,134 @@
+<h1>Editing business</h1>
+
+<% form_for(@business) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td>Short Description:</td>
+      <td><%= f.text_field :short_description %></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <em>Below is the primary location info.<br />
+          Additional locations can be added at the bottom of this form.</em>
+      </td>
+    </tr>
+    <tr>
+      <td>Address Line 1:</td>
+      <td><%= f.text_field :address_line_1 %></td>
+    </tr>
+    <tr>
+      <td>Address Line 2:</td>
+      <td><%= f.text_field :address_line_2 %></td>
+    </tr>
+    <tr>
+      <td>City:</td>
+      <td><%= f.text_field :city %></td>
+    </tr>
+    <tr>
+      <td>State:</td>
+      <td><%= f.text_field :state %></td>
+    </tr>
+    <tr>
+      <td>Zip:</td>
+      <td><%= f.text_field :zip %></td>
+    </tr>
+    <tr>
+      <td>Phone:</td>
+      <td><%= f.text_field :phone %></td>
+    </tr>
+    <tr>
+      <td>Phone 2:</td>
+      <td><%= f.text_field :phone_2 %></td>
+    </tr>
+    <tr>
+      <td>E-mail:</td>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <td>Website URL:</td>
+      <td><%= f.text_field :url %></td>
+    </tr>
+    <tr>
+      <td>Website URL 2:</td>
+      <td><%= f.text_field :url_2 %></td>
+    </tr>
+    <tr>
+      <td>Description:</td>
+      <td><%= f.text_area :description %></td>
+    </tr>
+    <tr>
+      <td>Tag List:</td>
+      <td>
+        <% Category.all.each do |c| %>
+          <h4><%= c.name %></h4>
+          <% c.tags.each do |t| %>
+            <%= check_box("business", "tagged_#{t.name}") %>
+            <%= t.name %><br />
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+  <%= f.submit "Update" %>
+
+  <h2>Additional Locations</h2>
+  <% unless @business.additional_locations.empty? %>
+    <% @business.additional_locations.each do |loc| %>
+      <p>
+        <table>
+          <tr>
+            <td>Address Line 1:</td>
+            <td><%= loc.address_line_1 %></td>
+            <td rowspan="2">
+              <%= link_to 'Edit', edit_additional_location_path(loc) %><br/>
+              <%= link_to 'Destroy', loc, :confirm => 'Are you sure?', 
+                :method => :delete %>
+            </td>
+          </tr>
+          <% unless loc.address_line_2.nil? %>
+            <tr>
+              <td>Address Line 2:</td>
+              <td><%= loc.address_line_2 %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td>City:</td>
+            <td><%= loc.city %></td>
+          </tr>
+          <tr>
+            <td>State:</td>
+            <td><%= loc.state %></td>
+          </tr>
+          <tr>
+            <td>Zip:</td>
+            <td><%= loc.zip %></td>
+          </tr>
+          <tr>
+            <td>Phone:</td>
+            <td><%= loc.phone %></td>
+          </tr>
+          <% unless loc.phone_2.nil? %>
+            <tr>
+              <td>Phone 2:</td>
+              <td><%= loc.phone_2 %></td>
+            </tr>
+          <% end %>
+        </table>
+      </p>
+    <% end %>
+  <% else %>
+    No additional locations.. yet<br />
+  <% end %>
+  <%= link_to 'Add Additional Location', :controller => 'additional_locations', :action => 'new', :business_id => @business.id %>
+  </p>
+<% end %>
+
+<%= link_to 'Show this Business', @business %> |
+<%= link_to 'Back to businesses', businesses_path %>

@@ -1,0 +1,43 @@
+<h1>Adding an additional location for <%= @business.name %></h1>
+
+<% form_for(@additional_location) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+  <table>
+    <tr>
+      <td>Address Line 1:</td>
+      <td><%= f.text_field :address_line_1 %></td>
+    </tr>
+    <tr>
+      <td>Address Line 2:</td>
+      <td><%= f.text_field :address_line_2 %></td>
+    </tr>
+    <tr>
+      <td>City:</td>
+      <td><%= f.text_field :city %></td>
+    </tr>
+    <tr>
+      <td>State:</td>
+      <td><%= f.text_field :state %></td>
+    </tr>
+    <tr>
+      <td>Zip:</td>
+      <td><%= f.text_field :zip %></td>
+    </tr>
+    <tr>
+      <td>Phone:</td>
+      <td><%= f.text_field :phone %></td>
+    </tr>
+    <tr>
+      <td>Phone 2:</td>
+      <td><%= f.text_field :phone_2 %></td>
+    </tr>
+  </table>
+  <%= hidden_field(:business, :id) %>
+  <%= f.submit "Update" %>
+
+<% end %>
+
+<%= link_to 'Show this Business', @business %> |
+<%= link_to 'Back to businesses', businesses_path %>

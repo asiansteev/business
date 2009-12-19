@@ -1,0 +1,21 @@
+<h1>Listing businesses</h1>
+
+<table>
+  <tr>
+    <td>Name</td>
+    <td>Tags</td>
+  </tr>
+<% for business in @businesses %>
+  <tr>
+    <td><%= business.name %>
+    <td><%= business.tag_list%></td>
+    <td><%= link_to 'Show', business %></td>
+  <td><%= link_to 'Edit', edit_business_path(business) %></td>
+<td><%= link_to 'Destroy', business, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New business', new_business_path %>
