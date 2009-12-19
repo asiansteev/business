@@ -1,15 +1,4 @@
 class TagsController < ApplicationController
-  # GET /tags
-  # GET /tags.xml
-  def index
-    @tags = Tag.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      #format.xml  { render :xml => @tags }
-    end
-    #render :layout => false
-  end
 
   # GET /tags/new
   # GET /tags/new.xml
@@ -45,31 +34,31 @@ class TagsController < ApplicationController
   end
 
   # PUT /tags/1
-  # PUT /tags/1.xml
   def update
     @tag = Tag.find_by_slug(params[:id])
-    respond_to do |format|
-      if @tag.update_attributes(params[:tag])
-        flash[:notice] = 'Tag was successfully updated.'
-        format.html { redirect_to(categories_path) }
-        format.xml  { head :ok }
+    params[:tag].each do |p|
+      if p.first.to_s.match(/of_category_(.+)[^=]$/)
+        cat_name = p.first.to_s.split('_')[2]
+        @category = Category.find_by_name(cat_name)
+        if (p[1]) == '1'
+          @category.tag_list.add(@tag.name)
+        else
+          @category.tag_list.remove(@tag.name)
+        end
+        @category.save
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @tag.errors, :status => :unprocessable_entity }
+        @tag.update_attribute(p[0], p[1])
       end
     end
+    redirect_to(categories_url)
   end
 
   # DELETE /tags/1
-  # DELETE /tags/1.xml
   def destroy
     @tag = Tag.find_by_slug(params[:id])
     @tag.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(categories_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(categories_url)
   end
 
   def add_tag

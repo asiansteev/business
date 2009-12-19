@@ -3,11 +3,13 @@
 <table>
   <tr>
     <td>Name</td>
+    <td>Paid Thru</td>
     <td>Tags</td>
   </tr>
 <% for business in @businesses %>
   <tr>
     <td><%= business.name %>
+    <td><%= business.paid_thru_year %>
     <td><%= business.tag_list%></td>
     <td><%= link_to 'Show', business %></td>
   <td><%= link_to 'Edit', edit_business_path(business) %></td>

@@ -43,15 +43,12 @@ class BusinessesController < ApplicationController
   def create
     @business = Business.new(params[:business])
 
-    respond_to do |format|
-      if @business.save
-        flash[:notice] = 'Business was successfully created.'
-        format.html { redirect_to(@business) }
-        format.xml  { render :xml => @business, :status => :created, :location => @business }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @business.errors, :status => :unprocessable_entity }
-      end
+    if @business.save
+      flash[:notice] = 'Business was successfully created.'
+      redirect_to(@business)
+    else
+      flash[:error] = 'Business was NOT successfully created.'
+      render :action => "new"
     end
   end
 
@@ -59,16 +56,19 @@ class BusinessesController < ApplicationController
   # PUT /businesses/1.xml
   def update
     @business = Business.find_by_slug(params[:id])
-    respond_to do |format|
-      if @business.update_attributes(params[:business])
-        flash[:notice] = 'Business was successfully updated.'
-        format.html { redirect_to(@business) }
-        format.xml  { head :ok }
+    params[:business].each do |p|
+      if p.first.to_s.match(/tagged_(.+)[^=]$/)
+        tag = p.first.to_s.split('_')[1]
+        if (p[1]) == '1'
+          @business.tag_list.add(tag)
+        else
+          @business.tag_list.remove(tag)
+        end
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @business.errors, :status => :unprocessable_entity }
+        @business.update_attribute(p[0], p[1])
       end
     end
+    redirect_to business_url
   end
 
   # DELETE /businesses/1
@@ -77,9 +77,6 @@ class BusinessesController < ApplicationController
     @business = Business.find_by_slug(params[:id])
     @business.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(businesses_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to businesses_url
   end
 end
