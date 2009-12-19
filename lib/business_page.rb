@@ -11,7 +11,8 @@ class BusinessPage < Page
         child
       else
         @business = Business.find_by_slug(m[1])
-        if @business and @business.paid_thru_year >= Date.today.year
+        # Turn off Feb. 1 of year following paid year
+        if @business and @business.paid_thru_year >= (Date.today - 31).year
           lazy_initialize_parser_and_context
           @context.globals.business = @business
           self
