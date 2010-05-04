@@ -1,9 +1,9 @@
 <h1>Listing Categories</h1>
 
 <p>
-  <table>
+  <table id="categorytable">
     <% for category in @categories %>
-      <tr>
+      <tr class="<%= cycle("odd", "even") %>">
         <td><strong><%= category.name %></stong>
         <td><%= link_to 'Edit', edit_category_path(category) %></td>
         <td><%= link_to 'Destroy', category, 
@@ -17,13 +17,13 @@
 
 <h2>Listing Labels</h2>
 <p>
-  <table>
+  <table id="labeltable">
     <tr>
       <th>Label</th>
       <th>Category</th>
     </tr>
     <% Tag.find(:all, :order => "name").each do |t| %>
-      <tr>
+      <tr class="<%= cycle("odd", "even") %>">
         <td><%= t %></td>
         <td>
           <%= 

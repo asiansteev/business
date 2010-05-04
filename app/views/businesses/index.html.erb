@@ -1,13 +1,13 @@
 <h1>Listing businesses</h1>
 
-<table>
+<table id="businesstable">
   <tr>
-    <td>Name</td>
-    <td>Paid Thru</td>
-    <td>Tags</td>
+    <th>Name</th>
+    <th>Paid Thru</th>
+    <th>Tags</th>
   </tr>
 <% for business in @businesses %>
-  <tr>
+  <tr class="<%= cycle("odd", "even") %>">
     <td><%= business.name %></td>
     <td>
       <%= business.paid_thru_year %>
