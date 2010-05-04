@@ -51,8 +51,8 @@ class Business < ActiveRecord::Base
   # Returns true if business is paid through today.
   #
   def paid_thru_now
-    # Turn off Feb. 1 of year following paid year
-    paid_thru_year >= (Date.today - 31).year
+    # Turn off March 1 of year following paid year
+    paid_thru_year >= (Date.today - 59).year
   end
 
   private
