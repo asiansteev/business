@@ -64,8 +64,10 @@ class BusinessesController < ApplicationController
         else
           @business.tag_list.remove(tag)
         end
+        @business.save
       else
         @business.update_attribute(p[0], p[1])
+        @business.save
       end
     end
     redirect_to business_url
