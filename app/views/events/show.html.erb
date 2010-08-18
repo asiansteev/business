@@ -1,0 +1,25 @@
+<table>
+  <tr>
+    <td>Name:</td>
+    <td><%= @event.name %></td>
+  </tr>
+  <tr>
+    <td>Where:</td>
+    <td><%= @event.where %></td>
+  </tr>
+  <tr>
+    <td>Description:</td>
+    <td><%= @event.description %></td>
+  </tr>
+  <tr>
+    <td>Date:</td>
+    <td><%= @event.date %></td>
+  </tr>
+  <tr>
+    <td>Time:</td>
+    <td><%= @event.time %></td>
+  </tr>
+</table>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

@@ -9,6 +9,7 @@
    define_routes do |map|
      map.resources :businesses, :path_prefix => "/admin"
      map.resources :categories, :path_prefix => "/admin"
+     map.resources :events, :path_prefix => "/admin"
      map.resources :tags, :path_prefix => "/admin"
      map.resources :additional_locations, :path_prefix => "/admin"
      map.with_options(:controller => 'businesses') do |business|
@@ -26,10 +27,12 @@
 
    def activate
      Page.send :include, BusinessTags
+     Page.send :include, EventTags
      Page.send :include, CategoryTags
      Page.send :include, LabelTags
      Page.send :include, AdditionalLocationTags
      admin.tabs.add "Businesses", "/admin/businesses", :after => "Layouts", :visibility => [:all]
+     admin.tabs.add "Events", "/admin/events", :after => "Layouts", :visibility => [:all]
      admin.tabs.add "Categories/Labels", "/admin/categories", :after => "Layouts", :visibility => [:all]
    
    end
