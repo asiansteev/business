@@ -88,7 +88,7 @@ class BusinessesController < ApplicationController
     if @business.save
       flash[:notice] = "1 Year Added to #{@business.name}"
     else
-      flash[:error] = "Failed to Add Year to #{business.name}"
+      flash[:error] = "Failed to Add Year to #{@business.name}"
     end
     redirect_to businesses_url
   end
